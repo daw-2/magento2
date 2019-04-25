@@ -13,25 +13,24 @@ namespace Boxydev\Learn\Controller\Hello;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
-use Magento\Framework\Controller\Result\RawFactory;
+use Magento\Framework\View\Result\PageFactory;
 
 class World extends Action
 {
     /**
-     * @var RawFactory
+     * @var PageFactory
      */
-    private $rawFactory;
+    private $pageFactory;
 
-    public function __construct(Context $context, RawFactory $rawFactory)
+    public function __construct(Context $context, PageFactory $pageFactory)
     {
         parent::__construct($context);
-        $this->rawFactory = $rawFactory;
+        $this->pageFactory = $pageFactory;
     }
 
     public function execute()
     {
-        $result = $this->rawFactory->create();
-        $result->setContents('<h1>Toto</h1>');
+        $result = $this->pageFactory->create();
 
         return $result;
     }
