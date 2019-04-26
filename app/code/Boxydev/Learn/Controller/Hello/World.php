@@ -13,11 +13,16 @@ namespace Boxydev\Learn\Controller\Hello;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\View\Result\Page;
 
 class World extends Action
 {
     public function execute()
     {
-        return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+        /** @var Page $page */
+        $page = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+        $page->getConfig()->getTitle()->set(ucfirst($this->_request->getModuleName()));
+
+        return $page;
     }
 }
