@@ -12,26 +12,12 @@
 namespace Boxydev\Learn\Controller\Hello;
 
 use Magento\Framework\App\Action\Action;
-use Magento\Framework\App\Action\Context;
-use Magento\Framework\View\Result\PageFactory;
+use Magento\Framework\Controller\ResultFactory;
 
 class World extends Action
 {
-    /**
-     * @var PageFactory
-     */
-    private $pageFactory;
-
-    public function __construct(Context $context, PageFactory $pageFactory)
-    {
-        parent::__construct($context);
-        $this->pageFactory = $pageFactory;
-    }
-
     public function execute()
     {
-        $result = $this->pageFactory->create();
-
-        return $result;
+        return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
     }
 }
