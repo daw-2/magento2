@@ -28,6 +28,6 @@ class Hello implements ArgumentInterface
 
     public function say()
     {
-        return 'Hello ' . $this->request->getActionName();
+        return __('Hello ' . $this->request->getActionName());
     }
 }
