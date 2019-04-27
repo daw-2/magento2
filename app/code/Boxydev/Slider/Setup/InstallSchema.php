@@ -23,7 +23,7 @@ class InstallSchema implements InstallSchemaInterface
         $setup->startSetup();
 
         $table = $setup->getConnection()
-            ->newTable($setup->getTable('boxydev_slides'))
+            ->newTable($setup->getTable('boxydev_slide'))
             ->addColumn('id', Table::TYPE_INTEGER, null, ['identity' => true, 'nullable' => false, 'primary' => true])
             ->addColumn('name', Table::TYPE_TEXT, 255, ['nullable' => false])
             ->addColumn('image', Table::TYPE_TEXT, 255, ['nullable' => false])
