@@ -39,6 +39,6 @@ class Hello extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->eventManager->dispatch('boxydev_hello_event', ['key' => 'value']);
-        $output->writeln(__('Hello world'));
+        $output->writeln(__('Hello %1', 'Matthieu'));
     }
 }
