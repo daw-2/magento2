@@ -33,9 +33,7 @@ class Hello extends Command
 
     protected function configure()
     {
-        $this
-            ->setName('boxydev:hello')
-        ;
+        $this->setName('boxydev:hello');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
