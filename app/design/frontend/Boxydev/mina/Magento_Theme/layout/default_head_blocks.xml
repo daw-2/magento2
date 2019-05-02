@@ -2,6 +2,6 @@
     <head>
         <css src="css/app.css" />
         <script src="js/app.js" />
-        <link rel="stylesheet" type="text/css" src="http://fonts.googleapis.com/css?family=Montserrat" src_type="url" />
+        <link rel="stylesheet" type="text/css" src="https://fonts.googleapis.com/css?family=Montserrat" src_type="url" />
     </head>
 </page>
