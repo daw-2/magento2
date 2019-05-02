@@ -68,6 +68,7 @@
         </container>
     </container>
 
+    <filters name="listing_filters" />
 
     <columns name="boxydev_slide_columns">
         <selectionsColumn name="ids">
