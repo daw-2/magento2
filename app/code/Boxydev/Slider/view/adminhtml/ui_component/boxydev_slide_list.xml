@@ -22,7 +22,7 @@
 
     <dataSource name="boxydev_slide_list" component="Magento_Ui/js/grid/provider">
         <settings>
-            <updateUrl path="mui/index/render"/>
+            <updateUrl path="mui/index/render" />
         </settings>
         <dataProvider class="SlideGridDataProvider" name="boxydev_slide_list_data_source">
             <settings>
@@ -50,6 +50,7 @@
             </action>
         </massaction>
         <paging name="listing_paging" />
+        <exportButton name="export_button" />
     </listingToolbar>
 
     <columns name="boxydev_slide_columns">
