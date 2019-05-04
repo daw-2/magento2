@@ -3,10 +3,6 @@
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">boxydev_slide_form.boxydev_slide_form_data_source</item>
         </item>
-        <item name="config" xsi:type="array">
-            <item name="dataScope" xsi:type="string">data</item>
-            <item name="namespace" xsi:type="string">slide_form</item>
-        </item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
     <settings>
@@ -14,6 +10,8 @@
             <button name="save" class="Boxydev\Slider\Block\Adminhtml\Slide\Edit\Button\Save" />
             <button name="back" class="Boxydev\Slider\Block\Adminhtml\Slide\Edit\Button\Back" />
         </buttons>
+        <namespace>boxydev_slide_form</namespace>
+        <dataScope>data</dataScope>
         <deps>
             <dep>boxydev_slide_form.boxydev_slide_form_data_source</dep>
         </deps>
