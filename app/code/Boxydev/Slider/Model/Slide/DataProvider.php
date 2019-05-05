@@ -13,6 +13,9 @@ namespace Boxydev\Slider\Model\Slide;
 
 use Boxydev\Slider\Model\ResourceModel\Slide\Collection;
 use Boxydev\Slider\Model\Slide;
+use Magento\Catalog\Model\Category\FileInfo;
+use Magento\Framework\App\ObjectManager;
+use Magento\Store\Model\StoreManagerInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class DataProvider extends AbstractDataProvider
@@ -24,16 +27,23 @@ class DataProvider extends AbstractDataProvider
      */
     protected $collection;
 
+    /**
+     * @var StoreManagerInterface
+     */
+    private $storeManager;
+
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
         Collection $collection,
+        StoreManagerInterface $storeManager,
         array $meta = [],
         array $data = []
     ) {
         $this->collection = $collection;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
+        $this->storeManager = $storeManager;
     }
 
     public function getData()
@@ -41,7 +51,20 @@ class DataProvider extends AbstractDataProvider
         $items = $this->collection->getItems();
         /** @var Slide $slide */
         foreach ($items as $slide) {
-            $this->loadedData[$slide->getId()] = $slide->getData();
+            $slideData = $slide->getData();
+
+            /** @var FileInfo $fileInfo */
+            $fileInfo = ObjectManager::getInstance()->get(FileInfo::class);
+            $fileName = $slideData['image'];
+            $slideData['image'] = [];
+            $filePath = 'pub/media/boxydev/slide/' . $fileName;
+
+            if ($fileInfo->isExist($filePath)) {
+                $slideData['image'][0]['name'] = $fileName;
+                $slideData['image'][0]['url'] = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'boxydev/slide/' . $fileName;
+            }
+
+            $this->loadedData[$slide->getId()] = $slideData;
         }
 
         return $this->loadedData;
