@@ -54,8 +54,8 @@ class Edit extends Action
             /** @var Slide $slide */
             $slide = $this->slideFactory->create();
 
-            if ($this->getRequest()->getParam('id')) {
-                $this->resourceSlide->load($slide, $slideData['id']);
+            if ($id = $this->getRequest()->getParam('id')) {
+                $this->resourceSlide->load($slide, $id);
             }
 
             $slide->addData([
