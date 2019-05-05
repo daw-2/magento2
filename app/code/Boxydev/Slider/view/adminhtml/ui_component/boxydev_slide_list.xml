@@ -86,7 +86,7 @@
             </settings>
         </column>
 
-        <actionsColumn name="actions" class="Boxydev\Slider\Ui\Component\Listing\Column\SlideActions">
+        <actionsColumn name="actions" class="Boxydev\Slider\Ui\Component\Listing\Columns\SlideActions">
             <settings>
                 <indexField>id</indexField>
             </settings>

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Boxydev\Slider\Ui\Component\Listing\Column;
+namespace Boxydev\Slider\Ui\Component\Listing\Columns;
 
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
