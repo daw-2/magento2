@@ -29,4 +29,35 @@
             <argument name="resourceModel" xsi:type="string">Boxydev\Slider\Model\ResourceModel\Slide</argument>
         </arguments>
     </virtualType>
+
+    <virtualType name="Boxydev\Slider\SlideImageUpload" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">boxydev/tmp/slide</argument>
+            <argument name="basePath" xsi:type="string">boxydev/slide</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Boxydev\Slider\Controller\Adminhtml\Slide\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Boxydev\Slider\SlideImageUpload</argument>
+        </arguments>
+    </type>
+
+    <type name="Boxydev\Slider\Controller\Adminhtml\Slide\Edit">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Boxydev\Slider\SlideImageUpload</argument>
+        </arguments>
+    </type>
 </config>
