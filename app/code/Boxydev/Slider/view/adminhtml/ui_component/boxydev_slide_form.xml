@@ -9,6 +9,7 @@
         <buttons>
             <button name="save" class="Boxydev\Slider\Block\Adminhtml\Slide\Edit\Button\Save" />
             <button name="back" class="Boxydev\Slider\Block\Adminhtml\Slide\Edit\Button\Back" />
+            <button name="delete" class="Boxydev\Slider\Block\Adminhtml\Slide\Edit\Button\Delete" />
         </buttons>
         <namespace>boxydev_slide_form</namespace>
         <dataScope>data</dataScope>
