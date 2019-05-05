@@ -1,0 +1,9 @@
+<?php
+    $slides = $this->getSlides();
+?>
+
+<div>
+    <?php foreach ($slides as $slide) : ?>
+        <h2><?= $slide->getName(); ?></h2>
+    <?php endforeach; ?>
+</div>
