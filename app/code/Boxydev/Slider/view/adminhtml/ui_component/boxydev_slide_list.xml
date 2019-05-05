@@ -22,6 +22,9 @@
 
     <dataSource name="boxydev_slide_list" component="Magento_Ui/js/grid/provider">
         <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">id</param>
+            </storageConfig>
             <updateUrl path="mui/index/render" />
         </settings>
         <dataProvider class="SlideGridDataProvider" name="boxydev_slide_list_data_source">
@@ -36,6 +39,7 @@
         <bookmark name="bookmarks" />
         <columnsControls name="columns_controls" />
         <filters name="listing_filters" />
+        <filterSearch name="fulltext" />
         <massaction name="listing_massaction">
             <action name="delete">
                 <settings>
