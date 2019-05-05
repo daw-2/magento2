@@ -51,7 +51,8 @@ class SlideList extends Template
 
     public function getSlides()
     {
-        $collection = $this->collection;
+        $collection = $this->collection->addFieldToFilter('image', ['notnull' => '']);
+        echo $collection->getSelect();
 
         return $collection;
     }

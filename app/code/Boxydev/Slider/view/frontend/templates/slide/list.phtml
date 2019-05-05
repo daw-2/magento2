@@ -5,5 +5,6 @@
 <div>
     <?php foreach ($slides as $slide) : ?>
         <h2><?= $slide->getName(); ?></h2>
+        <img src="<?= $slide->getImageUrl(); ?>" alt="<?= $slide->getName(); ?>">
     <?php endforeach; ?>
 </div>
