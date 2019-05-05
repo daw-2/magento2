@@ -16,6 +16,7 @@ use Boxydev\Slider\Model\Slide;
 use Boxydev\Slider\Model\SlideFactory;
 use Magento\Backend\App\Action;
 use Magento\Backend\Model\View\Result\Page;
+use Magento\Catalog\Model\ImageUploader;
 use Magento\Framework\Controller\ResultFactory;
 
 class Edit extends Action
@@ -30,16 +31,23 @@ class Edit extends Action
      */
     private $resourceSlide;
 
+    /**
+     * @var ImageUploader
+     */
+    private $imageUploader;
+
     public const ADMIN_RESOURCE = 'Boxydev_Slider::slide_save';
 
     public function __construct(
         Action\Context $context,
         SlideFactory $slideFactory,
-        ResourceSlide $resourceSlide
+        ResourceSlide $resourceSlide,
+        ImageUploader $imageUploader
     ) {
         parent::__construct($context);
         $this->slideFactory = $slideFactory;
         $this->resourceSlide = $resourceSlide;
+        $this->imageUploader = $imageUploader;
     }
 
     public function execute()
@@ -60,10 +68,11 @@ class Edit extends Action
 
             $slide->addData([
                 'name' => $slideData['name'],
-                'image' => $slideData['image']
+                'image' => $slideData['image'][0]['name']
             ]);
 
             $this->resourceSlide->save($slide);
+            $this->imageUploader->moveFileFromTmp($slide->getData('image'));
 
             $this->messageManager->addSuccessMessage(__('Success'));
 
