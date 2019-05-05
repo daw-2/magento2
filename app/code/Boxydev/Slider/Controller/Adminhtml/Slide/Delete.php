@@ -13,8 +13,7 @@ namespace Boxydev\Slider\Controller\Adminhtml\Slide;
 
 use Boxydev\Slider\Model\ResourceModel\Slide as ResourceSlide;
 use Boxydev\Slider\Model\SlideFactory;
-use Magento\Framework\App\Action\Action;
-use Magento\Framework\App\Action\Context;
+use Magento\Backend\App\Action;
 
 class Delete extends Action
 {
@@ -29,7 +28,7 @@ class Delete extends Action
     private $resourceSlide;
 
     public function __construct(
-        Context $context,
+        Action\Context $context,
         SlideFactory $slideFactory,
         ResourceSlide $resourceSlide
     ) {
