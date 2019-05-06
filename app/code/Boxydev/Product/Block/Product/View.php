@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Boxydev\Slider\Helper;
+namespace Boxydev\Product\Block\Product;
 
-class Data extends \Magento\Catalog\Helper\Data
+class View extends \Magento\Catalog\Block\Product\View
 {
-    public function getProduct()
+    public function getProductDefaultQty($product = null)
     {
-        // echo 'I\'m an override'; die();
-
-        return parent::getProduct();
+        return parent::getProductDefaultQty($product) * 3;
     }
 }

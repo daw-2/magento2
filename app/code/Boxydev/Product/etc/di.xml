@@ -5,4 +5,9 @@
     <type name="Magento\Catalog\Model\Product">
         <plugin name="ProductPlugin" type="Boxydev\Product\Plugin\ProductPlugin" sortOrder="1" />
     </type>
+
+    <preference for="Magento\Catalog\Model\Product" type="Boxydev\Product\Model\Product" />
+    <preference for="Magento\Catalog\Block\Product\View" type="Boxydev\Product\Block\Product\View" />
+    <preference for="Magento\Catalog\Helper\Data" type="Boxydev\Product\Helper\Data" />
+    <preference for="Magento\Checkout\Controller\Cart\Index" type="Boxydev\Product\Controller\Cart\Index" />
 </config>

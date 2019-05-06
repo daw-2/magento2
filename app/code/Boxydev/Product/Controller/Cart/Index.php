@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Boxydev\Slider\Controller\Cart;
+namespace Boxydev\Product\Controller\Cart;
 
 class Index extends \Magento\Checkout\Controller\Cart\Index
 {

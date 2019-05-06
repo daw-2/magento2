@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Boxydev\Slider\Model;
+namespace Boxydev\Product\Model;
 
 class Product extends \Magento\Catalog\Model\Product
 {
