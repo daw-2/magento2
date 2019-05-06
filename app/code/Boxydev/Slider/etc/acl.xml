@@ -10,6 +10,15 @@
                     </resource>
                 </resource>
                 <!--</resource>-->
+
+                <!-- Admin config -->
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Boxydev_Slider::slides" title="Slide Section" />
+                        </resource>
+                    </resource>
+                </resource>
             </resource>
         </resources>
     </acl>
