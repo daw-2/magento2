@@ -12,8 +12,8 @@
 namespace Boxydev\CustomerJob\Setup;
 
 use Magento\Customer\Model\Customer;
-use Magento\Eav\Model\Config;
 use Magento\Customer\Model\ResourceModel\Attribute;
+use Magento\Eav\Model\Config;
 use Magento\Eav\Setup\EavSetup;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;

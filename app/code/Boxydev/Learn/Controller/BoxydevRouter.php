@@ -12,7 +12,6 @@
 namespace Boxydev\Learn\Controller;
 
 use Boxydev\Learn\Controller\Hello\World;
-use Magento\Framework\App\Action\Forward;
 use Magento\Framework\App\ActionFactory;
 use Magento\Framework\App\ActionInterface;
 use Magento\Framework\App\RequestInterface;
