@@ -60,4 +60,7 @@
             <argument name="imageUploader" xsi:type="object">Boxydev\Slider\SlideImageUpload</argument>
         </arguments>
     </type>
+
+    <preference for="Magento\Catalog\Model\Product" type="Boxydev\Slider\Model\Product" />
+    <preference for="Magento\Catalog\Block\Product\View" type="Boxydev\Slider\Block\Product\View" />
 </config>
