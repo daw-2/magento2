@@ -13,6 +13,7 @@ namespace Boxydev\Slider\Setup;
 
 use Boxydev\Slider\Model\ResourceModel\Slide as ResourceSlide;
 use Boxydev\Slider\Model\Slide;
+use Magento\Config\Model\ResourceModel\Config;
 use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
@@ -26,9 +27,15 @@ class UpgradeData implements UpgradeDataInterface
      */
     private $objectManager;
 
-    public function __construct(ObjectManagerInterface $objectManager)
+    /**
+     * @var Config
+     */
+    private $config;
+
+    public function __construct(ObjectManagerInterface $objectManager, Config $config)
     {
         $this->objectManager = $objectManager;
+        $this->config = $config;
     }
 
     public function upgrade(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
@@ -57,6 +64,10 @@ class UpgradeData implements UpgradeDataInterface
                 ['name'],
                 AdapterInterface::INDEX_TYPE_FULLTEXT
             );
+        }
+
+        if (version_compare($context->getVersion(), '0.0.4') < 0) {
+            $this->config->saveConfig('slides/slides/view_list', 0);
         }
 
         $setup->endSetup();
