@@ -79,7 +79,7 @@
             </settings>
         </column>
 
-        <column name="image">
+        <column name="image" class="Boxydev\Slider\Ui\Component\Listing\Columns\Thumbnail" component="Magento_Ui/js/grid/columns/thumbnail">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Image</label>
