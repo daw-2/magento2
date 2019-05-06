@@ -57,12 +57,17 @@ class InstallData implements InstallDataInterface
                 'required' => false,
                 'position' => 150,
                 'user_defined' => true,
+                'system' => false
             ]
         );
 
         $attribute = $this->eavConfig->getAttribute(Customer::ENTITY, 'job');
         $attribute->setData('used_in_forms', [
             'adminhtml_customer', 'customer_account_create', 'customer_account_edit', 'checkout_register'
+        ]);
+        $attribute->addData([
+            'attribute_set_id' => 1,
+            'attribute_group_id' => 1
         ]);
 
         $this->attributeResource->save($attribute);
