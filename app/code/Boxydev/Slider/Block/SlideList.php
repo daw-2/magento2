@@ -53,6 +53,7 @@ class SlideList extends Template
     {
         $collection = $this->collection->addFieldToFilter('image', ['notnull' => '']);
         echo $collection->getSelect();
+        echo $this->_scopeConfig->getValue('slides/slides/view_list');
 
         return $collection;
     }
