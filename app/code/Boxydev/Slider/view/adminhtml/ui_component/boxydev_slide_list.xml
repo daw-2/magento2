@@ -82,7 +82,7 @@
         <column name="image">
             <settings>
                 <filter>text</filter>
-                <label translate="true">Name</label>
+                <label translate="true">Image</label>
             </settings>
         </column>
 
