@@ -13,4 +13,18 @@ namespace Boxydev\Slider\Api\Data;
 
 interface SlideInterface
 {
+    /**
+     * @return int
+     */
+    public function getId();
+
+    /**
+     * @return string
+     */
+    public function getName();
+
+    /**
+     * @return string
+     */
+    public function getImage();
 }

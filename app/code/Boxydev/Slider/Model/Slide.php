@@ -48,4 +48,19 @@ class Slide extends AbstractModel implements SlideInterface
     {
         return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'boxydev/slide/' . $this->getImage();
     }
+
+    public function getId()
+    {
+        return $this->_getData('id');
+    }
+
+    public function getName()
+    {
+        return $this->_getData('name');
+    }
+
+    public function getImage()
+    {
+        return $this->_getData('image');
+    }
 }

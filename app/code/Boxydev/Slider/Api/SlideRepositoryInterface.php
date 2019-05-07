@@ -16,13 +16,33 @@ use Magento\Framework\Api\SearchCriteriaInterface;
 
 interface SlideRepositoryInterface
 {
+    /**
+     * @param \Boxydev\Slider\Api\Data\SlideInterface $slide
+     * @return \Boxydev\Slider\Api\Data\SlideInterface
+     */
     public function save(SlideInterface $slide);
 
+    /**
+     * @param int $id
+     * @return \Boxydev\Slider\Api\Data\SlideInterface
+     */
     public function getById($id);
 
+    /**
+     * @param \Magento\Framework\Api\SearchCriteriaInterface
+     * @return \Magento\Framework\Api\SearchResultsInterface
+     */
     public function getList(SearchCriteriaInterface $criteria);
 
+    /**
+     * @param \Boxydev\Slider\Api\Data\SlideInterface $slide
+     * @return void
+     */
     public function delete(SlideInterface $slide);
 
+    /**
+     * @param int $id
+     * @return void
+     */
     public function deleteById($id);
 }
