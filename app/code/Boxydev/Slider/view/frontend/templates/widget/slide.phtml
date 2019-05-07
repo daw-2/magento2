@@ -1,0 +1,10 @@
+<?php
+$slideNumber = $this->getData('slides');
+?>
+<div>
+    <?= $slideNumber; ?>
+
+    <?php foreach ($this->getSlides() as $slide) :
+        echo $slide->getName();
+    endforeach; ?>
+</div>
