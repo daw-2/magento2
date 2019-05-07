@@ -15,8 +15,8 @@ use Magento\Framework\Model\AbstractModel;
 
 class Thing extends AbstractModel
 {
-    protected function _construct()
+    public function getName()
     {
-        // $this->_init();
+        return 'toto';
     }
 }

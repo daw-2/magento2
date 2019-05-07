@@ -13,20 +13,27 @@ namespace Boxydev\MyModule\Test\Unit\Model;
 
 use Boxydev\MyModule\Model\Thing;
 use Magento\Framework\Model\AbstractModel;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Registry;
+use Magento\TestFramework\ObjectManager;
 use PHPUnit\Framework\TestCase;
-use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 
 class ThingTest extends TestCase
 {
+    /**
+     * @var \Boxydev\MyModule\Model\Thing
+     */
     protected $_model;
 
     protected function setUp()
     {
-        $this->_model = (new ObjectManager($this))->getObject(Thing::class);
+        $objectManager = new \Magento\Framework\TestFramework\Unit\Helper\ObjectManager($this);
+        $this->_model = $objectManager->getObject(Thing::class);
     }
 
     public function testModel()
     {
         $this->assertInstanceOf(AbstractModel::class, $this->_model);
+        $this->assertSame('toto', $this->_model->getName());
     }
 }
