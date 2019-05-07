@@ -1,0 +1,108 @@
+<?php
+
+/*
+ * This file is part of the magento.com package.
+ *
+ * (c) Matthieu Mota <matthieu@boxydev.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Boxydev\Slider\Model;
+
+use Boxydev\Slider\Api\Data\SlideInterface;
+use Boxydev\Slider\Api\SlideRepositoryInterface;
+use Boxydev\Slider\Model\ResourceModel\Slide\Collection;
+use Boxydev\Slider\Model\ResourceModel\Slide\CollectionFactory;
+use Magento\Framework\Api\Search\SearchResultFactory;
+use Magento\Framework\Api\SearchCriteriaInterface;
+use Magento\Framework\Api\SortOrder;
+
+class SlideRepository implements SlideRepositoryInterface
+{
+    /**
+     * @var ResourceModel\Slide
+     */
+    private $resource;
+
+    /**
+     * @var SlideFactory
+     */
+    private $slideFactory;
+
+    /**
+     * @var SearchResultFactory
+     */
+    private $searchResultFactory;
+
+    /**
+     * @var CollectionFactory
+     */
+    private $slideCollectionFactory;
+
+    public function __construct(
+        \Boxydev\Slider\Model\ResourceModel\Slide $resource,
+        SlideFactory $slideFactory,
+        SearchResultFactory $searchResultFactory,
+        CollectionFactory $slideCollectionFactory
+    ) {
+        $this->resource = $resource;
+        $this->slideFactory = $slideFactory;
+        $this->searchResultFactory = $searchResultFactory;
+        $this->slideCollectionFactory = $slideCollectionFactory;
+    }
+
+    public function save(SlideInterface $slide)
+    {
+        $this->resource->save($slide);
+    }
+
+    public function getById($id)
+    {
+        $slide = $this->slideFactory->create();
+        $this->resource->load($slide, $id);
+
+        return $slide;
+    }
+
+    public function getList(SearchCriteriaInterface $criteria)
+    {
+        $searchResults = $this->searchResultFactory->create();
+        $searchResults->setSearchCriteria($criteria);
+
+        /** @var Collection $collection */
+        $collection = $this->slideCollectionFactory->create();
+
+        foreach ($criteria->getFilterGroups() as $filterGroup) {
+            foreach ($filterGroup->getFilters() as $filter) {
+                $collection->addFieldToFilter($filter->getField(), [$filter->getConditionType() => $filter->getValue()]);
+            }
+        }
+
+        $searchResults->setTotalCount($collection->getSize());
+
+        $sortOrders = $criteria->getSortOrders();
+        if ($sortOrders) {
+            /** @var SortOrder $sortOrder */
+            foreach ($sortOrders as $sortOrder) {
+                $collection->addOrder($sortOrder->getField(), $sortOrder->getDirection());
+            }
+        }
+
+        $collection->setCurPage($criteria->getCurrentPage());
+        $collection->setPageSize($criteria->getPageSize());
+
+        return $collection;
+    }
+
+    public function delete(SlideInterface $slide)
+    {
+        $this->resource->delete($slide);
+    }
+
+    public function deleteById($id)
+    {
+        $this->delete($this->getById($id));
+    }
+}
