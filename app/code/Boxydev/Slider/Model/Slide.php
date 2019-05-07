@@ -11,6 +11,7 @@
 
 namespace Boxydev\Slider\Model;
 
+use Boxydev\Slider\Api\Data\SlideInterface;
 use Boxydev\Slider\Model\ResourceModel\Slide as SlideResource;
 use Magento\Framework\Data\Collection\AbstractDb;
 use Magento\Framework\Model\AbstractModel;
@@ -19,7 +20,7 @@ use Magento\Framework\Model\ResourceModel\AbstractResource;
 use Magento\Framework\Registry;
 use Magento\Store\Model\StoreManagerInterface;
 
-class Slide extends AbstractModel
+class Slide extends AbstractModel implements SlideInterface
 {
     /**
      * @var StoreManagerInterface
