@@ -62,4 +62,5 @@
     </type>
 
     <preference for="Boxydev\Slider\Api\SlideRepositoryInterface" type="Boxydev\Slider\Model\SlideRepository" />
+    <preference for="Boxydev\Slider\Api\Data\SlideSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
 </config>

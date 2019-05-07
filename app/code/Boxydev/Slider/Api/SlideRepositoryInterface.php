@@ -30,7 +30,7 @@ interface SlideRepositoryInterface
 
     /**
      * @param \Magento\Framework\Api\SearchCriteriaInterface
-     * @return \Magento\Framework\Api\SearchResultsInterface
+     * @return \Boxydev\Slider\Api\Data\SlideSearchResultsInterface
      */
     public function getList(SearchCriteriaInterface $criteria);
 

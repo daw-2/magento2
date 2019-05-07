@@ -12,11 +12,11 @@
 namespace Boxydev\Slider\Model;
 
 use Boxydev\Slider\Api\Data\SlideInterface;
+use Boxydev\Slider\Api\Data\SlideSearchResultsInterfaceFactory;
 use Boxydev\Slider\Api\SlideRepositoryInterface;
 use Boxydev\Slider\Model\ResourceModel\Slide\Collection;
 use Boxydev\Slider\Model\ResourceModel\Slide\CollectionFactory;
 use Magento\Framework\Api\SearchCriteriaInterface;
-use Magento\Framework\Api\SearchResultsInterfaceFactory;
 use Magento\Framework\Api\SortOrder;
 
 class SlideRepository implements SlideRepositoryInterface
@@ -32,7 +32,7 @@ class SlideRepository implements SlideRepositoryInterface
     private $slideFactory;
 
     /**
-     * @var SearchResultsInterfaceFactory
+     * @var SlideSearchResultsInterfaceFactory
      */
     private $searchResultsFactory;
 
@@ -44,7 +44,7 @@ class SlideRepository implements SlideRepositoryInterface
     public function __construct(
         \Boxydev\Slider\Model\ResourceModel\Slide $resource,
         SlideFactory $slideFactory,
-        SearchResultsInterfaceFactory $searchResultsFactory,
+        SlideSearchResultsInterfaceFactory $searchResultsFactory,
         CollectionFactory $slideCollectionFactory
     ) {
         $this->resource = $resource;
