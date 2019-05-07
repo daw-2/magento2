@@ -13,22 +13,19 @@ namespace Boxydev\MyModule\Test\Unit\Model;
 
 use Boxydev\MyModule\Model\Thing;
 use Magento\Framework\Model\AbstractModel;
-use Magento\Framework\Model\Context;
-use Magento\Framework\Registry;
-use Magento\TestFramework\ObjectManager;
+use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use PHPUnit\Framework\TestCase;
 
 class ThingTest extends TestCase
 {
     /**
-     * @var \Boxydev\MyModule\Model\Thing
+     * @var Thing
      */
     protected $_model;
 
     protected function setUp()
     {
-        $objectManager = new \Magento\Framework\TestFramework\Unit\Helper\ObjectManager($this);
-        $this->_model = $objectManager->getObject(Thing::class);
+        $this->_model = (new ObjectManager($this))->getObject(Thing::class);
     }
 
     public function testModel()
