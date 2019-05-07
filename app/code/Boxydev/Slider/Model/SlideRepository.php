@@ -34,7 +34,7 @@ class SlideRepository implements SlideRepositoryInterface
     /**
      * @var SearchResultsInterfaceFactory
      */
-    private $searchResultFactory;
+    private $searchResultsFactory;
 
     /**
      * @var CollectionFactory
@@ -44,12 +44,12 @@ class SlideRepository implements SlideRepositoryInterface
     public function __construct(
         \Boxydev\Slider\Model\ResourceModel\Slide $resource,
         SlideFactory $slideFactory,
-        SearchResultsInterfaceFactory $searchResultFactory,
+        SearchResultsInterfaceFactory $searchResultsFactory,
         CollectionFactory $slideCollectionFactory
     ) {
         $this->resource = $resource;
         $this->slideFactory = $slideFactory;
-        $this->searchResultFactory = $searchResultFactory;
+        $this->searchResultsFactory = $searchResultsFactory;
         $this->slideCollectionFactory = $slideCollectionFactory;
     }
 
@@ -87,7 +87,7 @@ class SlideRepository implements SlideRepositoryInterface
         $collection->setPageSize($criteria->getPageSize());
         $collection->setCurPage($criteria->getCurrentPage());
 
-        $searchResults = $this->searchResultFactory->create();
+        $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
         $searchResults->setItems($collection->getItems());
         $searchResults->setTotalCount($collection->getSize());
