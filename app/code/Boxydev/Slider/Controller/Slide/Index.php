@@ -60,8 +60,8 @@ class Index extends Action
         /* $slide = $this->slideRepository->getById(27);
         var_dump($slide->getName()); */
 
-        /* $collection = $this->slideRepository->getList($this->searchCriteriaBuilder->addFilter('name', 'slide-3', 'eq')->create());
-        foreach ($collection as $item) {
+        /* $result = $this->slideRepository->getList($this->searchCriteriaBuilder->addFilter('name', 'slide-3', 'eq')->create());
+        foreach ($result->getItems() as $item) {
             var_dump($item->getData());
         } */
 

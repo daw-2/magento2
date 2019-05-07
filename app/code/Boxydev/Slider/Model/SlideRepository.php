@@ -68,9 +68,6 @@ class SlideRepository implements SlideRepositoryInterface
 
     public function getList(SearchCriteriaInterface $criteria)
     {
-        $searchResults = $this->searchResultFactory->create();
-        $searchResults->setSearchCriteria($criteria);
-
         /** @var Collection $collection */
         $collection = $this->slideCollectionFactory->create();
 
@@ -80,20 +77,20 @@ class SlideRepository implements SlideRepositoryInterface
             }
         }
 
-        $searchResults->setTotalCount($collection->getSize());
-
-        $sortOrders = $criteria->getSortOrders();
-        if ($sortOrders) {
-            /** @var SortOrder $sortOrder */
-            foreach ($sortOrders as $sortOrder) {
-                $collection->addOrder($sortOrder->getField(), $sortOrder->getDirection());
-            }
+        /** @var SortOrder $sortOrder */
+        foreach ((array) $criteria->getSortOrders() as $sortOrder) {
+            $collection->addOrder($sortOrder->getField(), $sortOrder->getDirection());
         }
 
-        $collection->setCurPage($criteria->getCurrentPage());
         $collection->setPageSize($criteria->getPageSize());
+        $collection->setCurPage($criteria->getCurrentPage());
 
-        return $collection;
+        $searchResults = $this->searchResultFactory->create();
+        $searchResults->setSearchCriteria($criteria);
+        $searchResults->setItems($collection->getItems());
+        $searchResults->setTotalCount($collection->getSize());
+
+        return $searchResults;
     }
 
     public function delete(SlideInterface $slide)
