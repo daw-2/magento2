@@ -22,6 +22,7 @@ class MyModuleTest extends TestCase
     {
         $registrar = new ComponentRegistrar();
         $paths = $registrar->getPaths(ComponentRegistrar::MODULE);
+
         $this->assertArrayHasKey('Boxydev_MyModule', $paths);
     }
 
@@ -30,6 +31,7 @@ class MyModuleTest extends TestCase
         $objectManager = ObjectManager::getInstance();
         /** @var ModuleList $moduleList */
         $moduleList = $objectManager->create(ModuleList::class);
+
         $this->assertTrue($moduleList->has('Boxydev_MyModule'));
     }
 }
