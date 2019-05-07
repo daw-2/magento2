@@ -41,8 +41,8 @@ class DataProvider extends AbstractDataProvider
         array $meta = [],
         array $data = []
     ) {
-        $this->collection = $collection;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
+        $this->collection = $collection;
         $this->storeManager = $storeManager;
     }
 
