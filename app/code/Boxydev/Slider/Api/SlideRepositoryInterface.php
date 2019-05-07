@@ -12,7 +12,7 @@
 namespace Boxydev\Slider\Api;
 
 use Boxydev\Slider\Api\Data\SlideInterface;
-use Magento\Framework\Api\Search\SearchCriteriaInterface;
+use Magento\Framework\Api\SearchCriteriaInterface;
 
 interface SlideRepositoryInterface
 {
