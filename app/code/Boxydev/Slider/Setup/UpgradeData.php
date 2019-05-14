@@ -14,7 +14,6 @@ namespace Boxydev\Slider\Setup;
 use Boxydev\Slider\Model\ResourceModel\Slide as ResourceSlide;
 use Boxydev\Slider\Model\Slide;
 use Magento\Config\Model\ResourceModel\Config;
-use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
@@ -55,15 +54,6 @@ class UpgradeData implements UpgradeDataInterface
                 ]);
                 $resourceSlide->save($slide);
             }
-        }
-
-        if (version_compare($context->getVersion(), '0.0.3') < 0) {
-            $setup->getConnection()->addIndex(
-                $setup->getTable('boxydev_slide'),
-                $setup->getConnection()->getIndexName($setup->getTable('boxydev_slide'), ['name'], AdapterInterface::INDEX_TYPE_FULLTEXT),
-                ['name'],
-                AdapterInterface::INDEX_TYPE_FULLTEXT
-            );
         }
 
         if (version_compare($context->getVersion(), '0.0.4') < 0) {
