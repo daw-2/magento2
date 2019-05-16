@@ -19,12 +19,30 @@ interface SlideInterface
     public function getId();
 
     /**
+     * @param $id
+     * @return void
+     */
+    public function setId($id);
+
+    /**
      * @return string
      */
     public function getName();
 
     /**
+     * @param $name
+     * @return void
+     */
+    public function setName($name);
+
+    /**
      * @return string
      */
     public function getImage();
+
+    /**
+     * @param $image
+     * @return void
+     */
+    public function setImage($image);
 }

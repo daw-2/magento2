@@ -54,13 +54,28 @@ class Slide extends AbstractModel implements SlideInterface
         return $this->_getData('id');
     }
 
+    public function setId($id)
+    {
+        $this->setData('id', $id);
+    }
+
     public function getName()
     {
         return $this->_getData('name');
     }
 
+    public function setName($name)
+    {
+        $this->setData('name', $name);
+    }
+
     public function getImage()
     {
         return $this->_getData('image');
+    }
+
+    public function setImage($image)
+    {
+        return $this->setData('image', $image);
     }
 }
