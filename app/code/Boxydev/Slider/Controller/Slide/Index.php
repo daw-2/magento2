@@ -58,11 +58,11 @@ class Index extends Action
         $this->slideRepository->save($slide); */
 
         /* $slide = $this->slideRepository->getById(27);
-        var_dump($slide->getName()); */
+        dump($slide->getName()); */
 
         /* $result = $this->slideRepository->getList($this->searchCriteriaBuilder->addFilter('name', 'slide-3', 'eq')->create());
         foreach ($result->getItems() as $item) {
-            var_dump($item->getData());
+            dump($item->getData());
         } */
 
         // $this->slideRepository->deleteById(27);
