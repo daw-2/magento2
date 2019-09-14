@@ -8,6 +8,7 @@ return [
         'Magento_Variable' => 1,
         'Boxydev_MyModule' => 1,
         'Magento_AdminNotification' => 1,
+        'Boxydev_Quotation' => 1,
         'Boxydev_Slider' => 1,
         'Magento_Backend' => 1,
         'Magento_Indexer' => 1,
