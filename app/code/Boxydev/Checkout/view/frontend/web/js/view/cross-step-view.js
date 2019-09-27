@@ -18,6 +18,8 @@ define([
         initialize: function () {
             this._super();
 
+            console.log(window.checkoutConfig);
+
             // On ajoute l'étape
             stepNavigator.registerStep(
                 // Identifiant de l'étape qui apparait dans l'url et aussi comme id dans le template
@@ -42,7 +44,6 @@ define([
          * Cette méthode est appellée si on arrive sur l'url de l'étape directement
          */
         navigate: function () {
-            console.log('ici ??');
             this.isVisible(true);
         },
 
