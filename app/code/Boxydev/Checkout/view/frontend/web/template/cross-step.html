@@ -6,6 +6,16 @@
          data-role="content">
 
         <form data-bind="submit: navigateToNextStep" novalidate="novalidate">
+            <div class="cross-products">
+                <!-- ko foreach: getCrossProducts() -->
+                    <div>
+                        <span data-bind="text: ko.toJSON($data)"></span>
+                        <h4>Nom : <!-- ko text: $data.name--><!-- /ko --></h4>
+                        <p>Prix : <span data-bind="text: $data.price"></span></p>
+                        <p>Image : <img data-bind="attr: {src: $data.thumbnail}"></p>
+                    </div>
+                <!-- /ko -->
+            </div>
             <div class="actions-toolbar">
                 <div class="primary">
                     <button data-role="opc-continue" type="submit" class="button action continue primary">

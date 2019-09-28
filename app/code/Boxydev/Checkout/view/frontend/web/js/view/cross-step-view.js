@@ -18,8 +18,6 @@ define([
         initialize: function () {
             this._super();
 
-            console.log(window.checkoutConfig);
-
             // On ajoute l'étape
             stepNavigator.registerStep(
                 // Identifiant de l'étape qui apparait dans l'url et aussi comme id dans le template
@@ -52,6 +50,13 @@ define([
          */
         navigateToNextStep: function () {
             stepNavigator.next();
+        },
+
+        /**
+         * On récupère les produits à afficher en cross dans le panier
+         */
+        getCrossProducts: function () {
+            return window.checkoutConfig.crossProducts;
         }
     });
 });
