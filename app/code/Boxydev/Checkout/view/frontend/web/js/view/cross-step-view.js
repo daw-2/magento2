@@ -32,7 +32,7 @@ define([
                 // Moins de 10 : Avant l'étape de livraison
                 // Entre 10 et 20 : Entre la livraison et le paiement
                 // Plus que 20 : Après l'étape de paiement
-                15
+                9
             );
 
             return this;

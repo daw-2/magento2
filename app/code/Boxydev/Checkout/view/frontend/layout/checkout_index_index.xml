@@ -15,7 +15,7 @@
                                             <!-- Moins de 1 : Avant l'étape de livraison -->
                                             <!-- Entre 1 et 2 : Entre la livraison et le paiement -->
                                             <!-- Plus que 2 : Après l'étape de paiement -->
-                                            <item name="sortOrder" xsi:type="string">2</item>
+                                            <item name="sortOrder" xsi:type="string">0</item>
                                             <item name="children" xsi:type="array">
                                                 <!-- Si on a besoin de déclarer d'autres composants -->
                                             </item>
