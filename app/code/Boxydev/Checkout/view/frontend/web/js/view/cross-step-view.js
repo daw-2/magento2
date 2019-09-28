@@ -2,8 +2,11 @@ define([
     'ko',
     'uiComponent',
     'underscore',
-    'Magento_Checkout/js/model/step-navigator'
-], function (ko, Component, _, stepNavigator) {
+    'Magento_Checkout/js/model/step-navigator',
+    'jquery',
+    'mage/storage',
+    'Magento_Checkout/js/action/get-totals'
+], function (ko, Component, _, stepNavigator, $, storage, getTotals) {
     'use strict';
 
     return Component.extend({
@@ -48,8 +51,18 @@ define([
         /**
          * Pour se rendre à l'étape suivante
          */
-        navigateToNextStep: function () {
-            stepNavigator.next();
+        navigateToNextStep: function (form) {
+            var data = $(form).serializeArray();
+
+            if (data.length > 0) {
+                storage.post('boxydev/checkout/crossproducts', JSON.stringify(data)).done(function (response) {
+                    // On rafraichit le panier dans le checkout
+                    getTotals([]);
+                    stepNavigator.next();
+                });
+            } else {
+                stepNavigator.next();
+            }
         },
 
         /**
