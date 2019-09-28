@@ -38,6 +38,27 @@
                                                 </item>
                                             </item>
                                         </item>
+
+                                        <item name="shipping-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="shippingAddress" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="before-shipping-method-form" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="boxydev_shipping_policy" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Boxydev_Checkout/js/view/shipping-policy</item>
+                                                                </item>
+                                                                <item name="shipping_policy" xsi:type="array">
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="componentDisabled" xsi:type="boolean">true</item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
                                     </item>
                                 </item>
 
