@@ -78,6 +78,18 @@
                                                         </item>
                                                     </item>
                                                 </item>
+
+                                                <item name="step-config" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="shipping-rates-validation" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="boxydevshipping-rates-validation" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Boxydev_Checkout/js/view/shipping-rates-validation</item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
                                             </item>
                                         </item>
                                     </item>
