@@ -1,0 +1,14 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <boxydev>
+                <active>1</active>
+                <model>Boxydev\Checkout\Model\Payment\Boxydev</model>
+                <order_status>pending</order_status>
+                <title>Boxydev</title>
+                <allowspecific>0</allowspecific>
+            </boxydev>
+        </payment>
+    </default>
+</config>
