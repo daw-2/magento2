@@ -24,7 +24,7 @@ class LayoutProcessorPlugin
                 'elementTmpl' => 'ui/form/element/input',
             ],
             'provider' => 'checkoutProvider',
-            'dataScope' => 'customCheckoutForm.text_field',
+            'dataScope' => 'customCheckoutForm.text_field_dynamic',
             'label' => 'Text Field Dynamic',
             'sortOrder' => 1,
             'validation' => [
