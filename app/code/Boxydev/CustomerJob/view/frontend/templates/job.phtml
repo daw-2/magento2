@@ -2,7 +2,7 @@
     <div class="field field-job required">
         <label class="label" for="job"><span>Job</span></label>
         <div class="control">
-            <input type="text" id="job" name="job" value="<?= $this->getCustomer()->getCustomAttribute('job')->getValue(); ?>" title="Job" class="input-text required-entry" data-validate="{required:true}" aria-required="true">
+            <input type="text" id="job" name="job" value="<?= $this->getCustomer()->getCustomAttribute('job') ? $this->getCustomer()->getCustomAttribute('job')->getValue() : null; ?>" title="Job" class="input-text required-entry" data-validate="{required:true}" aria-required="true">
         </div>
     </div>
 </fieldset>
