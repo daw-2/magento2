@@ -76,6 +76,16 @@
                                                                 </item>
                                                             </item>
                                                         </item>
+
+                                                        <item name="shipping-address-fieldset" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="city" xsi:type="array">
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="elementTmpl" xsi:type="string">Boxydev_Checkout/form/element/city.html</item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
                                                     </item>
                                                 </item>
 
