@@ -109,7 +109,7 @@
                                                                                     </item>
                                                                                     <item name="provider" xsi:type="string">checkoutProvider</item>
                                                                                     <item name="dataScope" xsi:type="string">customCheckoutForm.text_field</item>
-                                                                                    <item name="label" xsi:type="string" translate="true">Text Field</item>
+                                                                                    <item name="label" xsi:type="string" translate="true">Text Field Static</item>
                                                                                     <item name="sortOrder" xsi:type="string">1</item>
                                                                                     <item name="validation" xsi:type="array">
                                                                                         <item name="required-entry" xsi:type="string">true</item>
