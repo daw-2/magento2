@@ -8,11 +8,19 @@ use Magento\Quote\Api\Data\CartInterface;
 
 class Boxydev extends Cc
 {
-    protected $_code = 'boxydev';
+    const CODE = 'boxydev';
+
+    protected $_code = self::CODE;
+
+    protected $_canCapture = true;
 
     public function capture(InfoInterface $payment, $amount)
     {
-        dump($payment);
+        $this->debugData([
+            'order' => $payment->getCcNumber(),
+            'billing' => $payment->getOrder()->getBillingAddress()->getName(),
+            'amount' => $amount
+        ]);
 
         throw new \Magento\Framework\Validator\Exception(__('Payment capturing error.'));
     }

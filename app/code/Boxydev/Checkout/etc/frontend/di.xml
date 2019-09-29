@@ -4,7 +4,16 @@
         <arguments>
             <argument name="configProviders" xsi:type="array">
                 <item name="cross-products" xsi:type="object">Boxydev\Checkout\Model\DefaultConfigProvider</item>
+                <item name="boxydev-config-provider" xsi:type="object">Boxydev\Checkout\Model\ConfigProvider</item>
             </argument>
         </arguments>
     </type>
+
+    <virtualType name="Boxydev\Checkout\Model\ConfigProvider" type="Magento\Payment\Model\CcGenericConfigProvider">
+        <arguments>
+            <argument name="methodCodes" xsi:type="array">
+                <item name="boxydev" xsi:type="const">Boxydev\Checkout\Model\Payment\Boxydev::CODE</item>
+            </argument>
+        </arguments>
+    </virtualType>
 </config>

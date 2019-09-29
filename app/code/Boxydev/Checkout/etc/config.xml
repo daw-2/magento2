@@ -4,9 +4,12 @@
         <payment>
             <boxydev>
                 <active>1</active>
+                <debug>1</debug>
                 <model>Boxydev\Checkout\Model\Payment\Boxydev</model>
+                <payment_action>authorize_capture</payment_action>
                 <order_status>pending</order_status>
                 <title>Boxydev</title>
+                <cctypes>VI,MC</cctypes>
                 <allowspecific>0</allowspecific>
             </boxydev>
         </payment>
