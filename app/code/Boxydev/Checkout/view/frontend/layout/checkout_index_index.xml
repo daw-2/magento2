@@ -47,6 +47,14 @@
                                                                 </item>
                                                             </item>
                                                         </item>
+
+                                                        <item name="additional-payment-validators" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="boxydev-validator" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Boxydev_Checkout/js/view/validation</item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
                                                     </item>
                                                 </item>
                                             </item>
