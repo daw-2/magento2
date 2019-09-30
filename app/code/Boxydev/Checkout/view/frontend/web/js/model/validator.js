@@ -5,9 +5,9 @@ define([
 
     return {
         validate: function () {
-            messageList.addErrorMessage({message: 'Erreur'});
+            // messageList.addErrorMessage({message: 'Erreur'});
 
-            return false;
+            return true;
         }
     }
 });
