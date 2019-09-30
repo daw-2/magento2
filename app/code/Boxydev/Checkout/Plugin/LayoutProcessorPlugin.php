@@ -16,7 +16,7 @@ class LayoutProcessorPlugin
         // unset($result['components']['checkout']['children']['steps']['children']['billing-step']['children']['payment']['children']['afterMethods']['children']['discount']);
 
         // Ici, on peut faire la même chose que dans le XML
-        $result['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']['before-form']['children']['custom-checkout-form']['children']['custom-checkout-form-fields']['children'][] = [
+        $result['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']['before-form']['children']['custom-checkout-form']['children']['custom-checkout-form-fields']['children']['text_field_dynamic'] = [
             'component' => 'Magento_Ui/js/form/element/abstract',
             'config' => [
                 'customScope' => 'customCheckoutForm',
