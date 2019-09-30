@@ -16,4 +16,12 @@
             </argument>
         </arguments>
     </virtualType>
+
+    <type name="Magento\Checkout\Block\Onepage">
+        <arguments>
+            <argument name="layoutProcessors" xsi:type="array">
+                <item name="my-layout" xsi:type="object">Boxydev\Checkout\Block\Checkout\MyLayoutProcessor</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
