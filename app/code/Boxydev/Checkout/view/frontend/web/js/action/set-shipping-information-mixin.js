@@ -17,7 +17,7 @@ define([
                 shippingAddress['extension_attributes'][attribute_code] = shippingAddress.customAttributes[key].value;
             }
 
-            // exécuter la fonction orginal (Magento_Checkout/js/action/set-shipping-information)
+            // exécuter la fonction original (Magento_Checkout/js/action/set-shipping-information)
             return originalAction();
         });
     };
