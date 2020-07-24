@@ -32,10 +32,10 @@ class Upload extends Action
 
     public function execute()
     {
-        $imageId = $this->_request->getParam('param_name', 'image');
+        $imageField = 'image';
 
         try {
-            $result = $this->imageUploader->saveFileToTmpDir($imageId);
+            $result = $this->imageUploader->saveFileToTmpDir($imageField);
         } catch (\Exception $e) {
             $result = ['error' => $e->getMessage(), 'errorcode' => $e->getCode()];
         }

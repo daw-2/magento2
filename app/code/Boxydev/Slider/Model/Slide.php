@@ -13,11 +13,9 @@ namespace Boxydev\Slider\Model;
 
 use Boxydev\Slider\Api\Data\SlideInterface;
 use Boxydev\Slider\Model\ResourceModel\Slide as SlideResource;
-use Magento\Framework\Data\Collection\AbstractDb;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\Context;
 use Magento\Framework\Model\ResourceModel\AbstractResource;
-use Magento\Framework\Registry;
 use Magento\Store\Model\StoreManagerInterface;
 
 class Slide extends AbstractModel implements SlideInterface
@@ -29,10 +27,10 @@ class Slide extends AbstractModel implements SlideInterface
 
     public function __construct(
         Context $context,
-        Registry $registry,
+        \Magento\Framework\Registry $registry,
         StoreManagerInterface $storeManager,
         AbstractResource $resource = null,
-        AbstractDb $resourceCollection = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);

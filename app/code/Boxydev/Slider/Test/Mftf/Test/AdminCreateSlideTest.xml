@@ -1,0 +1,19 @@
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="AdminCreateSlideTest">
+        <annotations>
+            <features value="Slide"/>
+            <stories value="Create a slide via the Admin"/>
+        </annotations>
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin"/>
+        </before>
+        <amOnPage url="admin_yqwc47/boxydev/slide" stepKey="listSlide"/>
+        <waitForPageLoad stepKey="afterList"/>
+        <click selector="#add" stepKey="addSlide"/>
+        <waitForPageLoad stepKey="afterCreate"/>
+        <fillField userInput="MFTF" selector="input[name='name']" stepKey="fillName"/>
+        <click selector="#save" stepKey="saveSlide"/>
+        <see userInput="Success" stepKey="seeSuccess"/>
+    </test>
+</tests>

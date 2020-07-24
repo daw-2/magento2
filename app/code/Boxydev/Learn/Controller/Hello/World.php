@@ -22,6 +22,8 @@ class World extends Action
         /** @var Page $page */
         $page = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         $page->addHandle('boxydev_hello_world');
+        $result->getLayout()->getUpdate()->addHandle('boxydev_common');
+        $result->getLayout()->getUpdate()->getHandles();
         $page->getConfig()->getTitle()->set(ucfirst($this->_request->getModuleName()));
 
         return $page;

@@ -1,5 +1,13 @@
-<?php dump($block->getData('view_model')->say()); ?>
+<?php
+    dump($block->getMessage());
+    dump($block->getData('view_model'));
+    dump($block->getData('block'));
+    /** @var Boxydev\Learn\ViewModel\ $viewModel */
+    $viewModel = $block->getData('view_model');
+?>
 
-<h1>Hello <?= $block->getRequest()->getParam('name'); ?></h1>
-<h1><?= __('Hello World') ?></h1>
-<h1><?= __('Hello %1 of %2', $block->getRequest()->getParam('name'), 'toto') ?></h1>
+<h1><?= $viewModel->say(); ?></h1>
+<h2>Contenu de la requête :</h2>
+<?php dump($viewModel->getRequest()); ?>
+<h2>Client : <?= __('Hello World'); ?></h2>
+<?php dump($viewModel->getSession()->getCustomer()->getEmail()); ?>

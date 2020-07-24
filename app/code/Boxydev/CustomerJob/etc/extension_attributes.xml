@@ -2,4 +2,7 @@
     <extension_attributes for="Magento\Customer\Api\Data\CustomerInterface">
         <attribute code="job" type="string" />
     </extension_attributes>
+    <extension_attributes for="Magento\Catalog\Api\Data\ProductInterface">
+        <attribute code="job" type="string" />
+    </extension_attributes>
 </config>

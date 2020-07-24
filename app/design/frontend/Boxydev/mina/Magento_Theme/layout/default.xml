@@ -11,5 +11,29 @@
 
         <referenceBlock name="copyright" remove="true" />
         <referenceBlock name="report.bugs" remove="true" />
+
+        <referenceBlock name="header">
+            <arguments>
+                <argument name="show_part" xsi:type="string">nothing</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="footer_links">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="mon-lien">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Mon lien</argument>
+                    <argument name="path" xsi:type="string">url</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="content">
+            <block name="toto"
+                   class="Magento\Framework\View\Element\Text">
+                <action method="setText">
+                    <argument name="text" xsi:type="string"><![CDATA[
+                        <h1>Hello World FROM ELEMENT TEXT</h1>
+                    ]]></argument>
+                </action>
+            </block>
+        </referenceBlock>
     </body>
 </page>

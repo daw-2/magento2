@@ -1,4 +1,5 @@
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <tab id="boxydev" translate="label" sortOrder="1000">
             <label>Boxydev</label>
@@ -13,6 +14,10 @@
                     <label>Show slide list</label>
                     <comment>Show slide</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="number" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Slides number</label>
+                    <comment>Slides number</comment>
                 </field>
             </group>
         </section>

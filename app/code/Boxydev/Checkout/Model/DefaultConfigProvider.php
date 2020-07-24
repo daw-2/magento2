@@ -1,42 +1,57 @@
 <?php
 
+/*
+ * This file is part of the magento.com package.
+ *
+ * (c) Matthieu Mota <matthieu@boxydev.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Boxydev\Checkout\Model;
 
-use Magento\Catalog\Helper\Image as MagentoImage;
-use Magento\Catalog\Model\Product;
-use Magento\Catalog\Model\ResourceModel\Product\Collection;
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Catalog\Helper\Image;
 use Magento\Checkout\Model\ConfigProviderInterface;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 
 class DefaultConfigProvider implements ConfigProviderInterface
 {
     /**
-     * @var Collection
+     * @var ProductRepositoryInterface
      */
-    protected $productCollection;
+    private $repository;
 
     /**
-     * @var MagentoImage
+     * @var SearchCriteriaBuilder
      */
-    protected $imageHelper;
+    private $searchCriteriaBuilder;
+
+    /**
+     * @var Image
+     */
+    private $imageHelper;
 
     public function __construct(
-        Collection $productCollection,
-        MagentoImage $imageHelper
+        ProductRepositoryInterface $repository,
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        Image $imageHelper
     ) {
-        $this->productCollection = $productCollection;
+        $this->repository = $repository;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->imageHelper = $imageHelper;
     }
 
     public function getConfig()
     {
-        $products = $this->productCollection
-            ->addAttributeToSelect('name')
-            ->addAttributeToSelect('price')
-            ->addAttributeToSelect('thumbnail');
         $crossProducts = [];
 
-        /** @var Product $product */
-        foreach ($products as $product) {
+        $products = $this->repository->getList(
+            $this->searchCriteriaBuilder->create()
+        );
+
+        foreach ($products->getItems() as $key => $product) {
             $crossProducts[] = [
                 'id' => $product->getId(),
                 'name' => $product->getName(),
@@ -46,6 +61,10 @@ class DefaultConfigProvider implements ConfigProviderInterface
                     ->setImageFile($product->getThumbnail())
                     ->getUrl()
             ];
+
+            if (10 === $key) {
+                break;
+            }
         }
 
         return ['crossProducts' => $crossProducts];

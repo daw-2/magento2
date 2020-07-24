@@ -17,6 +17,10 @@
         </arguments>
     </virtualType>
 
+    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin name="LayoutProcessorPlugin" type="Boxydev\Checkout\Plugin\LayoutProcessorPlugin" sortOrder="1" />
+    </type>
+
     <type name="Magento\Checkout\Block\Onepage">
         <arguments>
             <argument name="layoutProcessors" xsi:type="array">

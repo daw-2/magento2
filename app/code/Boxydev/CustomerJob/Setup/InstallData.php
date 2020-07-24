@@ -52,12 +52,13 @@ class InstallData implements InstallDataInterface
             'job',
             [
                 'label' => 'Job',
-                'input' => 'text',
+                'input' => 'select',
                 'visible' => true,
                 'required' => false,
                 'position' => 150,
                 'user_defined' => true,
-                'system' => false
+                'system' => false,
+                'source' => 'Boxydev\CustomerJob\Model\Attribute\Source\Job'
             ]
         );
 

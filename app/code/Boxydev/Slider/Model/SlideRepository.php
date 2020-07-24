@@ -81,7 +81,9 @@ class SlideRepository implements SlideRepositoryInterface
 
         /** @var SortOrder $sortOrder */
         foreach ((array) $criteria->getSortOrders() as $sortOrder) {
-            $collection->addOrder($sortOrder->getField(), $sortOrder->getDirection());
+            if (null !== $sortOrder->getField()) {
+                $collection->addOrder($sortOrder->getField(), $sortOrder->getDirection());
+            }
         }
 
         $collection->setPageSize($criteria->getPageSize());

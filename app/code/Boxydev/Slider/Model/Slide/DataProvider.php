@@ -23,11 +23,6 @@ class DataProvider extends AbstractDataProvider
     protected $loadedData = [];
 
     /**
-     * @var Collection $collection
-     */
-    protected $collection;
-
-    /**
      * @var StoreManagerInterface
      */
     private $storeManager;
@@ -49,6 +44,7 @@ class DataProvider extends AbstractDataProvider
     public function getData()
     {
         $items = $this->collection->getItems();
+
         /** @var Slide $slide */
         foreach ($items as $slide) {
             $slideData = $slide->getData();
@@ -62,6 +58,7 @@ class DataProvider extends AbstractDataProvider
             if ($fileInfo->isExist($filePath)) {
                 $slideData['image'][0]['name'] = $fileName;
                 $slideData['image'][0]['url'] = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'boxydev/slide/' . $fileName;
+                $slideData['image'][0]['size'] = $fileInfo->getStat($filePath)['size'];
             }
 
             $this->loadedData[$slide->getId()] = $slideData;

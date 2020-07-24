@@ -10,6 +10,9 @@
                     <argument name="view_model" xsi:type="object">
                         Boxydev\Learn\ViewModel\Hello
                     </argument>
+                    <argument name="block" xsi:type="string">
+                        Bloc 1
+                    </argument>
                 </arguments>
             </block>
         </referenceContainer>

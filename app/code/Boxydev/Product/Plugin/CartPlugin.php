@@ -12,16 +12,28 @@
 namespace Boxydev\Product\Plugin;
 
 use Magento\Quote\Model\Quote;
+use Psr\Log\LoggerInterface;
 
 class CartPlugin
 {
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     public function beforeAddProduct(
         Quote $subject,
         $product,
         $request = null,
         $processMode = \Magento\Catalog\Model\Product\Type\AbstractType::PROCESS_MODE_FULL
     ) {
-        // $request['qty'] = 10;
+        $this->logger->debug('PLUGIN AVANT addProduct', ['request' => $request->getData()]);
+        $request->setQty(10);
 
         return [$product, $request, $processMode];
     }

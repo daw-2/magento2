@@ -3,6 +3,7 @@
         <arguments>
             <argument name="commands" xsi:type="array">
                 <item name="helloCommand" xsi:type="object">Boxydev\Learn\Command\Hello</item>
+                <item name="productCommand" xsi:type="object">Boxydev\Learn\Command\ProductCommand</item>
             </argument>
         </arguments>
     </type>

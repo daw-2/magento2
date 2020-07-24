@@ -13,11 +13,22 @@ namespace Boxydev\Learn\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
+use Psr\Log\LoggerInterface;
 
 class CartObserver implements ObserverInterface
 {
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     public function execute(Observer $observer)
     {
-        return $observer;
+        $this->logger->debug('Ajout au panier', ['product' => $observer->getProduct()->getName()]);
     }
 }

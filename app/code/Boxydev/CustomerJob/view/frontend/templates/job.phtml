@@ -3,6 +3,15 @@
         <label class="label" for="job"><span>Job</span></label>
         <div class="control">
             <input type="text" id="job" name="job" value="<?= $this->getCustomer()->getCustomAttribute('job') ? $this->getCustomer()->getCustomAttribute('job')->getValue() : null; ?>" title="Job" class="input-text required-entry" data-validate="{required:true}" aria-required="true">
+
+            <select name="job" id="job">
+                <?php foreach ($this->getJobs() as $job) { ?>
+                    <option
+                        value="<?= $job['value'] ?>"
+                        <?= $this->getCustomer()->getCustomAttribute('job')->getValue() === $job['value'] ? 'selected' : null ?>
+                    ><?= $job['label'] ?></option>
+                <?php } ?>
+            </select>
         </div>
     </div>
 </fieldset>

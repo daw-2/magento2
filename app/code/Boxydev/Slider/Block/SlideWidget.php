@@ -11,8 +11,10 @@
 
 namespace Boxydev\Slider\Block;
 
-use Boxydev\Slider\Model\ResourceModel\Slide\Collection;
-use Boxydev\Slider\Model\ResourceModel\Slide\CollectionFactory;
+use Boxydev\Slider\Api\SlideRepositoryInterface;
+use Magento\Framework\Api\FilterBuilder;
+use Magento\Framework\Api\Search\FilterGroup;
+use Magento\Framework\Api\Search\SearchCriteriaBuilder;
 use Magento\Framework\View\Element\Template;
 use Magento\Widget\Block\BlockInterface;
 
@@ -21,25 +23,47 @@ class SlideWidget extends Template implements BlockInterface
     protected $_template = 'widget/slide.phtml';
 
     /**
-     * @var CollectionFactory
+     * @var SlideRepositoryInterface
      */
-    private $collectionFactory;
+    private $repository;
+
+    /**
+     * @var SearchCriteriaBuilder
+     */
+    private $searchCriteriaBuilder;
+
+    /**
+     * @var FilterBuilder
+     */
+    private $filterBuilder;
 
     public function __construct(
         Template\Context $context,
-        CollectionFactory $collectionFactory,
+        SlideRepositoryInterface $repository,
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        FilterBuilder $filterBuilder,
         array $data = []
     ) {
         parent::__construct($context);
-        $this->collectionFactory = $collectionFactory;
+        $this->repository = $repository;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->filterBuilder = $filterBuilder;
     }
 
     public function getSlides()
     {
-        /** @var Collection $collection */
-        $collection = $this->collectionFactory->create();
-        $collection->setPageSize($this->getData('slides'));
+        $slides = $this->repository->getList(
+            $this->searchCriteriaBuilder
+                ->addFilter(
+                    $this->filterBuilder->create()
+                        ->setField('name')
+                        ->setValue('test')
+                        ->setConditionType('eq')
+                )
+                ->create()
+                ->setPageSize($this->getData('slides'))
+        );
 
-        return $collection;
+        return $slides->getItems();
     }
 }

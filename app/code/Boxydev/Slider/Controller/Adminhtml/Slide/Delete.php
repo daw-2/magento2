@@ -37,15 +37,21 @@ class Delete extends Action
         $this->resourceSlide = $resourceSlide;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function execute()
     {
         if ($id = $this->getRequest()->getParam('id')) {
             $slide = $this->slideFactory->create();
             $this->resourceSlide->load($slide, $id);
-            $this->resourceSlide->delete($slide);
+            try {
+                $this->resourceSlide->delete($slide);
+                $this->messageManager->addSuccessMessage(__('Slide deleted'));
+            } catch (\Exception $e) {
+                $this->messageManager->addErrorMessage($e->getMessage());
+            }
         }
-
-        $this->messageManager->addSuccessMessage(__('Slide deleted'));
 
         return $this->resultRedirectFactory->create()->setPath('*/*/');
     }

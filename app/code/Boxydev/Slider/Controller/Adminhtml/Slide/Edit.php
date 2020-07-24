@@ -36,8 +36,6 @@ class Edit extends Action
      */
     private $imageUploader;
 
-    public const ADMIN_RESOURCE = 'Boxydev_Slider::slide_save';
-
     public function __construct(
         Action\Context $context,
         SlideFactory $slideFactory,
@@ -50,11 +48,16 @@ class Edit extends Action
         $this->imageUploader = $imageUploader;
     }
 
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Boxydev_Slider::slide_save');
+    }
+
     public function execute()
     {
-        /** @var Page $resultPage */
-        $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-        $resultPage->setActiveMenu('Boxydev_Slider::head');
+        /** @var Page $result */
+        $result = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+        $result->setActiveMenu('Boxydev_Slider::head');
 
         $slideData = $this->getRequest()->getPostValue();
 
@@ -68,17 +71,20 @@ class Edit extends Action
 
             $slide->addData([
                 'name' => $slideData['name'],
-                'image' => $slideData['image'][0]['name']
+                'image' => $slideData['image'][0]['name'] ?? null
             ]);
 
             $this->resourceSlide->save($slide);
-            $this->imageUploader->moveFileFromTmp($slide->getData('image'));
+
+            if ($slide->getData('image')) {
+                $this->imageUploader->moveFileFromTmp($slide->getData('image'));
+            }
 
             $this->messageManager->addSuccessMessage(__('Success'));
 
             return $this->resultRedirectFactory->create()->setPath('*/*/');
         }
 
-        return $resultPage;
+        return $result;
     }
 }

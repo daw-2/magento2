@@ -11,6 +11,7 @@
 
 namespace Boxydev\Learn\ViewModel;
 
+use Magento\Customer\Model\Session;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
@@ -21,15 +22,47 @@ class Hello implements ArgumentInterface
      */
     private $request;
 
-    public function __construct(RequestInterface $request)
-    {
+    /**
+     * @var Session
+     */
+    private $session;
+
+    public function __construct(
+        RequestInterface $request,
+        Session $session
+    ) {
         $this->request = $request;
+        $this->session = $session;
+    }
+
+    /**
+     * @return RequestInterface
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    /**
+     * @return Session
+     */
+    public function getSession()
+    {
+        return $this->session;
     }
 
     public function say()
     {
-        $name = $this->request->getParam('name') ?? $this->request->getActionName();
+        if ('hi' === $this->getRequest()->getControllerName()) {
+            $output = 'Hello ';
+            $names = $this->getRequest()->getParam('names') ?? [];
+            foreach ($names as $name) {
+                $output .= $name . ' ';
+            }
 
-        return __('Hello ' . $name);
+            return $output;
+        }
+
+        return 'Hello FROM VIEW MODEL';
     }
 }
