@@ -61,6 +61,10 @@
                 <visible>true</visible>
                 <dataType>text</dataType>
                 <label translate="true">Name</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="stripped-min-length" xsi:type="number">3</rule>
+                </validation>
             </settings>
         </field>
 

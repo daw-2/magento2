@@ -1,6 +1,5 @@
-<?php
-    /** @var \Boxydev\Learn\ViewModel\Hello $viewModel */
-    $viewModel = $block->getData('view_model');
-?>
+<?php dump($block->getData('view_model')->say()); ?>
 
-<h1><?= $viewModel->say(); ?></h1>
+<h1>Hello <?= $block->getRequest()->getParam('name'); ?></h1>
+<h1><?= __('Hello World') ?></h1>
+<h1><?= __('Hello %1 of %2', $block->getRequest()->getParam('name'), 'toto') ?></h1>

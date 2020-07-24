@@ -1,0 +1,15 @@
+{
+    "name": "boxydev/module-checkout",
+    "description": "Test",
+    "authors": [
+        {
+            "name": "Matthieu Mota",
+            "email": "matthieumota@gmail.com"
+        }
+    ],
+    "require": {
+        "stripe/stripe-php": "^7.6"
+    },
+    "version": "1.0",
+    "minimum-stability": "stable"
+}
