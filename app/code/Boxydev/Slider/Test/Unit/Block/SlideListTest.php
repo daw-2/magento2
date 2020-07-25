@@ -12,8 +12,8 @@
 namespace Boxydev\Slider\Test\Unit\Block;
 
 use Boxydev\Slider\Block\SlideList;
-use Boxydev\Slider\Helper\Data;
 use Boxydev\Slider\Model\ResourceModel\Slide\Collection;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use Magento\Framework\View\Element\BlockInterface;
 use PHPUnit\Framework\TestCase;
@@ -26,42 +26,45 @@ class SlideListTest extends TestCase
     protected $_block;
 
     /**
-     * @var Collection
+     * @var ScopeConfigInterface
      */
-    protected $collectionMock;
-
-    /**
-     * @var Data
-     */
-    protected $helperBlock;
+    protected $scopeConfigMock;
 
     protected function setUp()
     {
-        $this->collectionMock = $this->getMockBuilder(Collection::class)
-            ->setMethods(['addFieldToFilter'])
+        $collectionMock = $this->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
-            ->getMock();
-        $this->collectionMock->method('addFieldToFilter')->willReturn($this->collectionMock);
+            ->getMockForAbstractClass();
 
-        $this->helperBlock = $this->getMockBuilder(Data::class)
-            ->setMethods(['getConfig'])
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->scopeConfigMock = $this->createMock(ScopeConfigInterface::class);
 
         $this->_block = (new ObjectManager($this))->getObject(SlideList::class, [
-            'collection' => $this->collectionMock,
-            'helper' => $this->helperBlock
+            'collection' => $collectionMock,
+            'scopeConfig' => $this->scopeConfigMock
         ]);
     }
 
-    public function testInstance()
+    public function testSlideListIsABlock()
     {
         $this->assertInstanceOf(BlockInterface::class, $this->_block);
     }
 
-    public function testCollection()
+    /**
+     * @dataProvider configs
+     */
+    public function testSlideListCollectionHasAPageSize($expected)
     {
-        $this->helperBlock->method('getConfig')->willReturn(5);
-        $this->assertSame(5, $this->_block->getSlides()->getPageSize());
+        $this->scopeConfigMock->method('getValue')
+            ->with('slides/slides/number')
+            ->willReturn($expected);
+        $this->assertSame($expected, $this->_block->getSlides()->getPageSize());
+    }
+
+    public function configs()
+    {
+        return [
+            [5],
+            [15]
+        ];
     }
 }

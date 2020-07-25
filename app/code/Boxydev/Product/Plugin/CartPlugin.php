@@ -45,6 +45,7 @@ class CartPlugin
         $request = null,
         $processMode = \Magento\Catalog\Model\Product\Type\AbstractType::PROCESS_MODE_FULL
     ) {
+        $this->logger->debug('Closure : ', ['closure' => $proceed]);
         $result = $proceed($product, $request, $processMode);
 
         return $result;

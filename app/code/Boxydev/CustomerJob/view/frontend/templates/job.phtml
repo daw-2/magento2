@@ -2,13 +2,27 @@
     <div class="field field-job required">
         <label class="label" for="job"><span>Job</span></label>
         <div class="control">
-            <input type="text" id="job" name="job" value="<?= $this->getCustomer()->getCustomAttribute('job') ? $this->getCustomer()->getCustomAttribute('job')->getValue() : null; ?>" title="Job" class="input-text required-entry" data-validate="{required:true}" aria-required="true">
+            <!-- <input type="text" id="job" name="job" value="<?= $block->getCustomer()->getJob(); ?>"
+                   title="Job"
+                   class="input-text required-entry"
+                   data-validate="{required:true}"
+                   aria-required="true"> -->
+
+            <?php
+                /** @var \Boxydev\CustomerJob\Block\CustomerJob $block */
+                $collection = $block->getCustomerCollection()
+                    ->addAttributeToSelect('job');
+                dump($collection->getItems());
+
+                $repository = $block->getCustomerListByRepository();
+                dump($repository->getItems());
+            ?>
 
             <select name="job" id="job">
                 <?php foreach ($this->getJobs() as $job) { ?>
                     <option
                         value="<?= $job['value'] ?>"
-                        <?= $this->getCustomer()->getCustomAttribute('job')->getValue() === $job['value'] ? 'selected' : null ?>
+                        <?= $this->getCustomer()->getJob() === $job['value'] ? 'selected' : null ?>
                     ><?= $job['label'] ?></option>
                 <?php } ?>
             </select>

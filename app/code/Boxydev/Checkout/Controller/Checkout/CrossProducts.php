@@ -11,48 +11,46 @@
 
 namespace Boxydev\Checkout\Controller\Checkout;
 
-use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Catalog\Model\ProductRepository;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Data\Form\FormKey;
 use Magento\Framework\DataObject;
-use Magento\Quote\Api\CartRepositoryInterface;
-use Magento\Quote\Model\Quote;
 
 class CrossProducts extends Action
 {
     /**
-     * @var Quote
+     * @var \Magento\Quote\Model\Quote
      */
-    private $quote;
+    protected $quote;
 
     /**
      * @var FormKey
      */
-    private $formKey;
+    protected $formKey;
 
     /**
-     * @var CartRepositoryInterface
-     */
-    private $cartRepository;
-
-    /**
-     * @var ProductRepositoryInterface
+     * @var ProductRepository
      */
     private $productRepository;
+
+    /**
+     * @var \Magento\Quote\Api\CartRepositoryInterface
+     */
+    private $cartRepository;
 
     public function __construct(
         Context $context,
         \Magento\Checkout\Model\Session $session,
-        CartRepositoryInterface $cartRepository,
-        FormKey $formKey,
-        ProductRepositoryInterface $productRepository
+        \Magento\Quote\Api\CartRepositoryInterface $cartRepository,
+        ProductRepository $productRepository,
+        FormKey $formKey
     ) {
         parent::__construct($context);
         $this->quote = $session->getQuote();
-        $this->formKey = $formKey;
         $this->cartRepository = $cartRepository;
+        $this->formKey = $formKey;
         $this->productRepository = $productRepository;
     }
 
@@ -61,18 +59,17 @@ class CrossProducts extends Action
         $requestData = $this->getRequest()->getContent();
         $products = json_decode($requestData, true);
 
+        $request = new DataObject([
+            'form_key' => $this->formKey->getFormKey(),
+            'qty' => 1
+        ]);
+
         foreach ($products as $product) {
-            $instance = $this->productRepository->getById((int) $product['value']);
-            $request = new DataObject([
-                'form_key' => $this->formKey->getFormKey(),
-                'qty' => 1
-            ]);
-            $this->quote->addProduct($instance, $request);
+            $this->quote->addProduct($this->productRepository->getById((int) $product['value']), $request);
         }
 
         $this->cartRepository->save($this->quote);
 
-        return $this->resultFactory->create(ResultFactory::TYPE_JSON)
-            ->setData(['success' => 'ok']);
+        return $this->resultFactory->create(ResultFactory::TYPE_JSON)->setData(['success' => 'ok']);
     }
 }

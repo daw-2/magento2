@@ -1,4 +1,5 @@
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <virtualType name="SlideGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
         <arguments>
             <argument name="collection" xsi:type="object" shared="false">Boxydev\Slider\Model\ResourceModel\Slide\Collection</argument>
@@ -30,7 +31,8 @@
         </arguments>
     </virtualType>
 
-    <virtualType name="Boxydev\Slider\SlideImageUpload" type="Magento\Catalog\Model\ImageUploader">
+    <virtualType name="Boxydev\Slider\SlideImageUpload"
+                 type="Magento\Catalog\Model\ImageUploader">
         <arguments>
             <argument name="baseTmpPath" xsi:type="string">boxydev/tmp/slide</argument>
             <argument name="basePath" xsi:type="string">boxydev/slide</argument>
@@ -62,5 +64,6 @@
     </type>
 
     <preference for="Boxydev\Slider\Api\SlideRepositoryInterface" type="Boxydev\Slider\Model\SlideRepository" />
+    <preference for="Boxydev\Slider\Api\Data\SlideInterface" type="Boxydev\Slider\Model\Slide" />
     <preference for="Boxydev\Slider\Api\Data\SlideSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
 </config>

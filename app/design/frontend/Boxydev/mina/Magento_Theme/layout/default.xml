@@ -22,6 +22,9 @@
                 <arguments>
                     <argument name="label" xsi:type="string" translate="true">Mon lien</argument>
                     <argument name="path" xsi:type="string">url</argument>
+                    <argument name="attributes" xsi:type="array">
+                        <item name="target" xsi:type="string">_blank</item>
+                    </argument>
                 </arguments>
             </block>
         </referenceBlock>

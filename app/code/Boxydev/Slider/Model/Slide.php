@@ -12,10 +12,8 @@
 namespace Boxydev\Slider\Model;
 
 use Boxydev\Slider\Api\Data\SlideInterface;
-use Boxydev\Slider\Model\ResourceModel\Slide as SlideResource;
 use Magento\Framework\Model\AbstractModel;
-use Magento\Framework\Model\Context;
-use Magento\Framework\Model\ResourceModel\AbstractResource;
+use Boxydev\Slider\Model\ResourceModel\Slide as SlideResource;
 use Magento\Store\Model\StoreManagerInterface;
 
 class Slide extends AbstractModel implements SlideInterface
@@ -26,10 +24,10 @@ class Slide extends AbstractModel implements SlideInterface
     private $storeManager;
 
     public function __construct(
-        Context $context,
+        \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         StoreManagerInterface $storeManager,
-        AbstractResource $resource = null,
+        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
@@ -40,11 +38,6 @@ class Slide extends AbstractModel implements SlideInterface
     protected function _construct()
     {
         $this->_init(SlideResource::class);
-    }
-
-    public function getImageUrl()
-    {
-        return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'boxydev/slide/' . $this->getImage();
     }
 
     public function getId()
@@ -75,5 +68,10 @@ class Slide extends AbstractModel implements SlideInterface
     public function setImage($image)
     {
         return $this->setData('image', $image);
+    }
+
+    public function getImageUrl()
+    {
+        return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'boxydev/slide/' . $this->getImage();
     }
 }

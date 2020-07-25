@@ -1,29 +1,15 @@
 <?php
 
-/*
- * This file is part of the magento.com package.
- *
- * (c) Matthieu Mota <matthieu@boxydev.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Boxydev\CustomerJob\Block;
 
 use Boxydev\CustomerJob\Model\Attribute\Source\Job;
-use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Session;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 
 class CustomerJob extends Template
 {
-    /**
-     * @var CustomerRepositoryInterface
-     */
-    private $customerRepository;
-
     /**
      * @var Session
      */
@@ -32,28 +18,58 @@ class CustomerJob extends Template
     /**
      * @var Job
      */
-    private $jobSource;
+    private $job;
+
+    /**
+     * @var \Magento\Customer\Model\ResourceModel\Customer\Collection
+     */
+    private $customerCollection;
+
+    /**
+     * @var \Magento\Customer\Api\CustomerRepositoryInterface
+     */
+    private $customerRepository;
+    /**
+     * @var SearchCriteriaBuilder
+     */
+    private $searchCriteriaBuilder;
 
     public function __construct(
         Context $context,
-        CustomerRepositoryInterface $customerRepository,
         Session $customerSession,
-        Job $jobSource,
+        Job $job,
+        \Magento\Customer\Model\ResourceModel\Customer\Collection $customerCollection,
+        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
+        SearchCriteriaBuilder $searchCriteriaBuilder,
         array $data = []
     ) {
         parent::__construct($context, $data);
-        $this->customerRepository = $customerRepository;
         $this->customerSession = $customerSession;
-        $this->jobSource = $jobSource;
+        $this->job = $job;
+        $this->customerCollection = $customerCollection;
+        $this->customerRepository = $customerRepository;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
     }
 
     public function getCustomer()
     {
-        return $this->customerRepository->getById($this->customerSession->getId());
+        return $this->customerSession->getCustomer();
+    }
+
+    public function getCustomerCollection()
+    {
+        return $this->customerCollection;
+    }
+
+    public function getCustomerListByRepository()
+    {
+        return $this->customerRepository->getList(
+            $this->searchCriteriaBuilder->create()
+        );
     }
 
     public function getJobs()
     {
-        return $this->jobSource->getAllOptions();
+        return $this->job->getAllOptions();
     }
 }

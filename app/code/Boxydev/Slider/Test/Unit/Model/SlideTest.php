@@ -11,6 +11,7 @@
 
 namespace Boxydev\Slider\Test\Unit\Model;
 
+use Boxydev\Slider\Api\Data\SlideInterface;
 use Boxydev\Slider\Model\Slide;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
@@ -28,32 +29,40 @@ class SlideTest extends TestCase
 
     protected function setUp()
     {
-        $storeInterfaceMock = $this->getMockBuilder(StoreInterface::class)
+        $storeMock = $this->getMockBuilder(StoreInterface::class)
             ->setMethods(['getBaseUrl'])
             ->getMockForAbstractClass();
-        $storeInterfaceMock
-            // ->expects($this->once()) // La méthode est appelée une seule fois
+        $storeMock
+            ->expects($this->once())
             ->method('getBaseUrl')
             ->with(UrlInterface::URL_TYPE_MEDIA)
             ->willReturn('http://localhost/media/');
 
         $storeManagerMock = $this->createMock(StoreManagerInterface::class);
-        $storeManagerMock->method('getStore')->willReturn($storeInterfaceMock);
+        $storeManagerMock->method('getStore')->willReturn($storeMock);
 
         $this->_model = (new ObjectManager($this))->getObject(Slide::class, [
             'storeManager' => $storeManagerMock
         ]);
     }
 
-    public function testInstance()
+    public function testSlideIsInstanceOfModel()
     {
         $this->assertInstanceOf(AbstractModel::class, $this->_model);
+        $this->assertInstanceOf(SlideInterface::class, $this->_model);
+    }
+
+    public function testSlideHasGettersSetters()
+    {
+        $this->assertNull($this->_model->getId());
+        $this->_model->setId(5);
+        $this->assertSame(5, $this->_model->getId());
     }
 
     /**
      * @dataProvider slides
      */
-    public function testModel($image, $url)
+    public function testSlideHasAnImageUrl($image, $url)
     {
         $this->_model->setImage($image);
         $this->assertSame($url, $this->_model->getImageUrl());
@@ -62,7 +71,7 @@ class SlideTest extends TestCase
     public function slides()
     {
         return [
-            ['chaton.jpg', 'http://localhost/media/boxydev/slide/chaton.jpg'],
+            ['toto.jpg', 'http://localhost/media/boxydev/slide/toto.jpg'],
             ['titi.jpg', 'http://localhost/media/boxydev/slide/titi.jpg']
         ];
     }

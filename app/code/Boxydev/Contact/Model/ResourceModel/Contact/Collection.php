@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Boxydev\Slider\Model\ResourceModel\Slide;
+namespace Boxydev\Contact\Model\ResourceModel\Contact;
 
-use Boxydev\Slider\Model\Slide;
-use Boxydev\Slider\Model\ResourceModel\Slide as SlideResource;
+use Boxydev\Contact\Model\Contact;
+use Boxydev\Contact\Model\ResourceModel\Contact as ContactResource;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 class Collection extends AbstractCollection
@@ -21,13 +21,6 @@ class Collection extends AbstractCollection
 
     protected function _construct()
     {
-        $this->_init(Slide::class, SlideResource::class);
-    }
-
-    protected function _initSelect()
-    {
-        parent::_initSelect();
-
-        // $this->getSelect()->join();
+        $this->_init(Contact::class, ContactResource::class);
     }
 }
