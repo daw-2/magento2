@@ -1,56 +1,72 @@
 <?php
 
-/*
- * This file is part of the magento.com package.
- *
- * (c) Matthieu Mota <matthieu@boxydev.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Boxydev\Learn\Command;
 
-use Magento\Catalog\Model\Product;
-use Magento\Catalog\Model\ProductFactory;
-use Magento\Framework\ObjectManagerInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ProductCommand extends Command
 {
     /**
-     * @var ObjectManagerInterface
+     * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
      */
-    private $objectManager;
-
-    /**
-     * @var ProductFactory
-     */
-    private $productFactory;
+    private $collectionFactory;
 
     public function __construct(
-        ObjectManagerInterface $objectManager,
-        ProductFactory $productFactory,
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $collectionFactory,
         string $name = null
     ) {
         parent::__construct($name);
-        $this->objectManager = $objectManager;
-        $this->productFactory = $productFactory;
+
+        $this->collectionFactory = $collectionFactory;
     }
 
     protected function configure()
     {
-        $this->setName('boxydev:product');
+        $this
+            ->setName('boxydev:product:see')
+            ->setDefinition(
+                new InputDefinition([
+                    new InputArgument('number', InputArgument::OPTIONAL, 'Blabla', 10),
+                    new InputOption('sort', 's', InputOption::VALUE_REQUIRED, 'Blabla', 'id'),
+                    new InputOption('order', 'o', InputOption::VALUE_REQUIRED, 'Blabla', 'asc')
+                ])
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $product = $this->objectManager->create(Product::class);
-        dump(get_class($product));
-        dump(get_class($this->productFactory->create()));
+        $sort = $input->getOption('sort');
+        $order = $input->getOption('order');
 
-        $output->writeln(__('Hello world'));
+        $collection = $this->collectionFactory->create();
+        $collection
+            ->addAttributeToSelect(['name', 'price'])
+            ->joinField('quantity', 'cataloginventory_stock_item', 'qty', 'product_id = entity_id')
+            ->setOrder($sort, strtoupper($order))
+            ->setPageSize($input->getArgument('number'));
+
+        dump($collection->getSelect()->__toString());
+
+        $products = [];
+        foreach ($collection->getItems() as $productItem) {
+            $products[] = [
+                $productItem->getSku(), $productItem->getName(),
+                $productItem->getPrice(), $productItem->getQuantity(),
+            ];
+        }
+
+        $table = new Table($output);
+
+        $table
+            ->setHeaders(['SKU', 'name', 'price', 'quantity'])
+            ->setRows($products);
+
+        $table->render();
     }
 }

@@ -1,57 +1,81 @@
 <?php
 
-/*
- * This file is part of the magento.com package.
- *
- * (c) Matthieu Mota <matthieu@boxydev.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Boxydev\Checkout\Model;
 
-use Magento\Catalog\Api\ProductRepositoryInterface;
-use Magento\Catalog\Helper\Image;
+use Magento\Catalog\Helper\Image as MagentoImage;
+use Magento\Catalog\Model\ProductFactory;
+use Magento\Catalog\Model\ResourceModel\Product;
+use Magento\Catalog\Model\ResourceModel\Product\Collection;
+use Magento\Checkout\Model\Cart;
 use Magento\Checkout\Model\ConfigProviderInterface;
-use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Framework\DataObject;
 
 class DefaultConfigProvider implements ConfigProviderInterface
 {
     /**
-     * @var ProductRepositoryInterface
+     * @var Collection
      */
-    private $repository;
+    protected $productCollection;
 
     /**
-     * @var SearchCriteriaBuilder
+     * @var MagentoImage
      */
-    private $searchCriteriaBuilder;
+    protected $imageHelper;
 
     /**
-     * @var Image
+     * @var Cart
      */
-    private $imageHelper;
+    private $cart;
+
+    /**
+     * @var Product
+     */
+    private $productResource;
+
+    /**
+     * @var ProductFactory
+     */
+    private $productFactory;
 
     public function __construct(
-        ProductRepositoryInterface $repository,
-        SearchCriteriaBuilder $searchCriteriaBuilder,
-        Image $imageHelper
+        Collection $productCollection,
+        MagentoImage $imageHelper,
+        Cart $cart,
+        Product $productResource,
+        ProductFactory $productFactory
     ) {
-        $this->repository = $repository;
-        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->productCollection = $productCollection;
         $this->imageHelper = $imageHelper;
+        $this->cart = $cart;
+        $this->productResource = $productResource;
+        $this->productFactory = $productFactory;
     }
 
     public function getConfig()
     {
+        $category = false;
+
+        if ($firstItem = $this->cart->getItems()->getFirstItem()) {
+            $this->productResource->load(
+                $product = $this->productFactory->create(),
+                $firstItem->getProductId()
+            );
+            $categories = $product->getCategoryIds();
+            $category = $categories[0] ?? false;
+        }
+
+        $products = $this->productCollection
+            ->addAttributeToSelect('*')
+            ->setPageSize(10);
+
+        if ($category) {
+            $products->addCategoriesFilter(['in' => $category]);
+        }
+
         $crossProducts = [];
 
-        $products = $this->repository->getList(
-            $this->searchCriteriaBuilder->create()
-        );
-
-        foreach ($products->getItems() as $key => $product) {
+        /** @var Product $product */
+        foreach ($products as $product) {
             $crossProducts[] = [
                 'id' => $product->getId(),
                 'name' => $product->getName(),
@@ -61,12 +85,10 @@ class DefaultConfigProvider implements ConfigProviderInterface
                     ->setImageFile($product->getThumbnail())
                     ->getUrl()
             ];
-
-            if (10 === $key) {
-                break;
-            }
         }
 
-        return ['crossProducts' => $crossProducts];
+        return [
+            'crossProducts' => $crossProducts,
+        ];
     }
 }

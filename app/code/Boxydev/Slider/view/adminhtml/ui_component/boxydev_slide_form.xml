@@ -6,6 +6,7 @@
         </item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
+
     <settings>
         <buttons>
             <button name="save" class="Boxydev\Slider\Block\Adminhtml\Slide\Edit\Button\Save" />
@@ -18,6 +19,7 @@
             <dep>boxydev_slide_form.boxydev_slide_form_data_source</dep>
         </deps>
     </settings>
+
     <dataSource name="boxydev_slide_form_data_source">
         <argument name="data" xsi:type="array">
             <item name="js_config" xsi:type="array">

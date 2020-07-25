@@ -3,15 +3,12 @@
       layout="1column">
     <body>
         <referenceContainer name="content">
-            <block name="boxydev.hello.world"
+            <block name="boxydev.hello.page"
                    class="Boxydev\Learn\Block\Hello"
                    template="Boxydev_Learn::hello_world.phtml">
                 <arguments>
                     <argument name="view_model" xsi:type="object">
                         Boxydev\Learn\ViewModel\Hello
-                    </argument>
-                    <argument name="block" xsi:type="string">
-                        Bloc 1
                     </argument>
                 </arguments>
             </block>

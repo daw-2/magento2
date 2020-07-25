@@ -68,4 +68,9 @@ class SlideList extends Template
 
         return $collection;
     }
+
+    public function showSlides()
+    {
+        return (bool) $this->_scopeConfig->getValue('slides/slides/view_list') ?? 1;
+    }
 }

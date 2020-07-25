@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the magento.com package.
- *
- * (c) Matthieu Mota <matthieu@boxydev.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Boxydev\Product\Plugin;
 
 use Magento\Customer\Model\Authentication;
@@ -18,25 +9,30 @@ use Psr\Log\LoggerInterface;
 class AuthenticationPlugin
 {
     /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
      * @var CustomerRegistry
      */
     private $customerRegistry;
 
-    public function __construct(LoggerInterface $logger, CustomerRegistry $customerRegistry)
-    {
-        $this->logger = $logger;
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    public function __construct(
+        CustomerRegistry $customerRegistry,
+        LoggerInterface $logger
+    ) {
         $this->customerRegistry = $customerRegistry;
+        $this->logger = $logger;
     }
 
     public function afterAuthenticate(Authentication $subject, $result, $customerId)
     {
-        $customer = $this->customerRegistry->retrieveSecureData($customerId);
-        $this->logger->debug('Connexion de ' . $customer->getEmail(), ['password' => 'passwordddd']);
+        $customer = $this->customerRegistry->retrieve($customerId);
+        $this->logger->debug(sprintf(
+            'Connexion de %s',
+            $customer->getEmail()
+        ), ['customer' => $customer]);
 
         return $result;
     }
