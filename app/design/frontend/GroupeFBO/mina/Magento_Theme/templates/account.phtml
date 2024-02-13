@@ -1,0 +1,40 @@
+<?php // dump($block->getHref(), $block->getLabel()); ?>
+
+<div class="dropdown-wrap minicart-wrapper">
+    <span class="dropdown-button account"></span>
+    <div id="dropdown-dialog" data-role="dropdownDialog" class="block block-minicart">
+        <ul>
+            <li>
+                <a href="<?= $block->getHref(); ?>"><?= __('Mon compte'); ?></a>
+            </li>
+            <?= $block->getChildHtml(); ?>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'dropdownDialog'
+        ], function($, dropdownDialog) {
+            'use strict';
+
+            $('#dropdown-dialog').dropdownDialog({
+                appendTo: '.dropdown-wrap',
+                triggerTarget: '.dropdown-button',
+                closeOnMouseLeave: false,
+                closeOnEscape: true,
+                timeout: 2000,
+                triggerClass: 'active',
+                parentClass: 'active',
+                buttons: [/*{
+                    text: $.mage.__('Fermer'),
+                    click: function () {
+                        $(this).dropdownDialog('close');
+                    }
+                }*/]
+            });
+        }
+    );
+</script>
+

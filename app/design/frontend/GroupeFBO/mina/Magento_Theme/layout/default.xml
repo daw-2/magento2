@@ -1,0 +1,38 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="header-wrapper">
+            <container name="header-right" as="header-right" htmlTag="div" htmlClass="header right"></container>
+        </referenceContainer>
+
+        <referenceContainer name="header.panel.wrapper" remove="true"></referenceContainer>
+
+        <move element="minicart" destination="header-right" />
+        <move element="wish-list-link" destination="header-right" before="minicart" />
+        <move element="my-account-link" destination="header-right" />
+        <move element="authorization-link" destination="my-account-link" />
+        <move element="compare-link-wrapper" destination="header-right" />
+        <move element="top.search" destination="header-right" before="my-account-link" />
+
+        <referenceBlock name="wish-list-link" template="Magento_Theme::link.phtml"></referenceBlock>
+        <referenceBlock name="my-account-link" template="Magento_Theme::account.phtml"></referenceBlock>
+
+        <referenceBlock name="logo">
+            <arguments>
+                <argument name="logo_file" xsi:type="string">images/logo.jpg</argument>
+                <argument name="logo_width" xsi:type="number">80</argument>
+                <argument name="logo_height" xsi:type="number">80</argument>
+            </arguments>
+        </referenceBlock>
+
+        <referenceContainer name="header-wrapper">
+            <container before="logo" name="header-left" as="header-left" htmlTag="div" htmlClass="header left">
+                <block name="phone" template="Magento_Theme::phone.phtml">
+                    <arguments>
+                        <argument name="phone" xsi:type="string">03 00 58 21 00</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,8 @@
+<?php
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $config = $objectManager->get(Magento\Framework\App\Config\ScopeConfigInterface::class);
+?>
+
+<p>
+    Appellez-nous: <strong><?php echo $config->getValue('general/store_information/phone'); ?></strong>
+</p>

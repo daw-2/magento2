@@ -1,0 +1,118 @@
+<?php
+    use Magento\Catalog\Block\Product\View;
+
+    /** @var View $block */
+?>
+<div>
+    <?php dump($block->getProduct()->getName()); ?>
+    <h2><?php echo $block->getProduct()->getName(); ?></h2>
+
+    <p>
+        <?php echo $block->getChildHtml(); ?>
+    </p>
+</div>
+
+<script>
+    require(['jquery', 'example', 'domReady!'], function ($, example) {
+        console.log('Test', example, $);
+
+        $('h2').css('text-decoration', 'underline');
+    });
+</script>
+
+<div data-mage-init='{ "example": { "name": "Fiorella" } }'></div>
+<div data-mage-init='{ "example": { "name": "Toto" } }'></div>
+<div class="example"></div>
+<script type="text/x-magento-init">
+    {
+        ".example": {
+            "example": { "name": "Super" }
+        }
+    }
+</script>
+
+<button id="button">
+    <span><?= $block->escapeHtml(__('Click me')) ?></span>
+</button>
+
+<div id="modal">
+    <div class="modal-body-content">
+        <h2><?= $block->escapeHtml(__('Title')) ?></h2>
+        <p><?= $block->escapeHtml(__('Content')) ?></p>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require([
+        "jquery",
+        "Magento_Ui/js/modal/modal"
+    ],function($, modal) {
+
+        var options = {
+            type: 'popup',
+            responsive: true,
+            title: 'Main title',
+            buttons: [{
+                text: $.mage.__('Ok'),
+                class: '',
+                click: function () {
+                    this.closeModal();
+                }
+            }]
+        };
+
+        var popup = modal(options, $('#modal'));
+        $("#button").click(function() {
+            $('#modal').modal('openModal');
+        });
+    });
+</script>
+
+<ul class="slick">
+    <li>A</li>
+    <li>B</li>
+    <li>C</li>
+</ul>
+
+<script>
+    require(['jquery', 'slick', 'domReady!'], function ($) {
+        $('.slick').slick({
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 2,
+            slidesToScroll: 1
+        });
+    });
+</script>
+
+<div data-bind="scope: 'toto'">
+    <h1 data-bind="text: customer().fullname"></h1>
+    <input type="checkbox" data-bind="checked: reversed" />
+    <button data-bind="click: reverseName">Inverser</button>
+    <!-- ko if: reversed() -->
+        <h2 data-bind="text: customer().fullname.split('').reverse().join('')"></h2>
+    <!-- /ko  -->
+    <ul data-bind="foreach: items">
+        <li>
+            <span data-bind="text: $data"></span>
+            <button data-bind="click: $parent.removeItem.bind($parent, $data)">X</button>
+        </li>
+    </ul>
+    <button data-bind="click: addItem">Ajouter</button>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "toto": {
+                        "component": "js/ui"
+                    }
+                }
+            }
+        }
+    }
+</script>
+

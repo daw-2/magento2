@@ -1,0 +1,110 @@
+@import "_slick.less";
+@import "_slick-theme.less";
+
+& when (@media-common = true) {
+    body {
+        background-color: lightgray;
+    }
+}
+
+@theme__color__primary: red;
+@theme__color__primary-alt: blue;
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    .box-tocart .action.tocart {
+        .lib-button-size(
+            @_button-padding: 10px
+        );
+    }
+}
+
+.box-tocart .action.tocart {
+    .lib-button-size(
+        @_button-padding: 30px
+    );
+
+    .lib-css(
+        box-shadow,
+        inset 0 1px 0 0 @color-white
+    );
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    body {
+        background-color: red;
+    }
+}
+
+.minicart-wrapper, .block-search {
+    float: none;
+}
+
+.header {
+    &.content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #e8e8e8;
+
+        &:before, &:after {
+            display: none;
+        }
+    }
+
+    &.right {
+        display: flex;
+        gap: 8px;
+    }
+}
+
+.logo {
+    margin: 0;
+}
+
+.navigation ul {
+    text-align: center;
+}
+
+.heart {
+    .lib-icon-font(
+        @icon-wishlist-full,
+        @_icon-font-size: 20px
+    );
+
+    color: #a8a8a8;
+
+    &:hover {
+        color: darken(#a8a8a8, 10%);
+    }
+    
+    &:before {
+        width: 28px;
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.account {
+    .lib-icon-font(@icon-account, @_icon-font-size: 24px);
+
+    color: #a8a8a8;
+    &:hover {
+        cursor: pointer;
+        color: darken(#a8a8a8, 10%);
+    }
+
+    &:before {
+        width: 28px;
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@header__background-color: #f0f0f0;
